@@ -10,16 +10,6 @@ import requests
 
 "### Please provide the following information about your taxi ride:"
 
-
-first_name = columns[0].text_input("First name", value="John")
-columns[0].write(first_name)
-
-last_name = columns[1].text_input("Last name", value="Doe")
-columns[1].write(last_name)
-
-location = columns[2].text_input("Location", value="Paris")
-columns[2].write(location)
-
 st.markdown('''
 When would you like to be picked up?
 ''')
