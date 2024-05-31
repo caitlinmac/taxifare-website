@@ -1,5 +1,5 @@
 import streamlit as st
-import datetime
+import datetime, timedelta
 import requests
 
 '''
@@ -43,33 +43,14 @@ Let's make sure we have the right info:
 
 st.write(f'Your taxi ride would be from ({pickup_longitude},{pickup_latitude}) to ({dropoff_longitude},{dropoff_latitude}) for {passenger_count} passenger(s) on {date} at {time}')
 
-pickup_datetime = f'{date} {time}'
 
 
-url = 'https://taxifare.lewagon.ai/predict'
-params = {'pickup_datetime': pickup_datetime,
-          'pickup_longitude' : pickup_longitude,
-          'pickup_latitude' : pickup_latitude,
-          'dropoff_longitude' : dropoff_longitude,
-          'dropoff_latitude' : dropoff_latitude,
-          'passenger_count' : passenger_count}
-response = requests.get(url, params=params)
 
-"## Your estimated fare is..."
-st.write(f"{response.json()['fare']}$")
+#date = columns_datetime[0].date_input(
+#    "Date",datetime.date.now())
 
-st.write(f'{date} {time-1}')
+#date_time_minus1 = datetime.now() - timedelta(hours = 1)
+#date_time_minushalfhour = datetime.now() - timedelta(hours = 0.5)
+#date_time_plus1 = datetime.now() + timedelta(hours = 1)
+#date_time_plushalfhour = datetime.now() + timedelta(hours = 0.5)
 
-# 1hr earlier
-pickup_datetime_min1 = f'{date} {time-1}'
-url = 'https://taxifare.lewagon.ai/predict'
-params = {'pickup_datetime': pickup_datetime,
-          'pickup_longitude' : pickup_longitude,
-          'pickup_latitude' : pickup_latitude,
-          'dropoff_longitude' : dropoff_longitude,
-          'dropoff_latitude' : dropoff_latitude,
-          'passenger_count' : passenger_count}
-response_minus1 = requests.get(url, params=params)
-# 30 minutes earlier
-# 30 minutes later
-# 1hr later
