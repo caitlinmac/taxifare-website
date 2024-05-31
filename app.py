@@ -9,22 +9,36 @@ import requests
 
 
 "### Please provide the following information about your taxi ride:"
+
+
+first_name = columns[0].text_input("First name", value="John")
+columns[0].write(first_name)
+
+last_name = columns[1].text_input("Last name", value="Doe")
+columns[1].write(last_name)
+
+location = columns[2].text_input("Location", value="Paris")
+columns[2].write(location)
+
 st.markdown('''
 When would you like to be picked up?
 ''')
-date = st.date_input(
+columns_datetime = st.columns(2)
+date = columns_datetime[0].date_input(
     "Date",datetime.date(2014,7,6))
-time = st.time_input('Time', datetime.time(19, 18))
+time = columns_datetime[1].time_input('Time', datetime.time(19, 18))
 st.markdown('''
 What is your pickup location?
 ''')
-pickup_longitude = st.text_input('Pickup longitude',-73.950655)
-pickup_latitude = st.text_input('Pickup latitude',40.783282)
+columns_pickup = st.columns(2)
+pickup_longitude = columns_pickup[0].text_input('Pickup longitude',-73.950655)
+pickup_latitude = columns_pickup[1].text_input('Pickup latitude',40.783282)
 st.markdown('''
 What is your dropoff location?
 ''')
-dropoff_longitude = st.text_input('Dropoff longitude',-73.984365)
-dropoff_latitude = st.text_input('Dropoff latitude',40.769802)
+columns_dropoff = st.columns(2)
+dropoff_longitude = columns_dropoff[0].text_input('Dropoff longitude',-73.984365)
+dropoff_latitude = columns_dropoff[1].text_input('Dropoff latitude',40.769802)
 st.markdown('''
 How many passengers will you be?
 ''')
@@ -53,3 +67,19 @@ response = requests.get(url, params=params)
 
 "## Your estimated fare is..."
 st.write(f"{response.json()['fare']}$")
+
+st.write(f'{date} {time-1}')
+
+# 1hr earlier
+pickup_datetime_min1 = f'{date} {time-1}'
+url = 'https://taxifare.lewagon.ai/predict'
+params = {'pickup_datetime': pickup_datetime,
+          'pickup_longitude' : pickup_longitude,
+          'pickup_latitude' : pickup_latitude,
+          'dropoff_longitude' : dropoff_longitude,
+          'dropoff_latitude' : dropoff_latitude,
+          'passenger_count' : passenger_count}
+response_minus1 = requests.get(url, params=params)
+# 30 minutes earlier
+# 30 minutes later
+# 1hr later
