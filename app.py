@@ -43,6 +43,8 @@ Let's make sure we have the right info:
 
 st.write(f'Your taxi ride would be from ({pickup_longitude},{pickup_latitude}) to ({dropoff_longitude},{dropoff_latitude}) for {passenger_count} passenger(s) on {date} at {time}')
 
+pickup_datetime = f'{date} {time}'
+
 url = 'https://taxifare.lewagon.ai/predict'
 params = {'pickup_datetime': pickup_datetime,
           'pickup_longitude' : pickup_longitude,
